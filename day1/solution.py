@@ -61,9 +61,3 @@ if __name__ == '__main__':
     ans = find_sum_g(data, free_var=2)
     print(f'{ans} add up to 2020')
     print(f'Their product is {functools.reduce(operator.mul, ans)}')
-
-
-    print(f'\nMethod 3:')
-    ans = find_sum_g(data, free_var=3)
-    print(f'{ans} add up to 2020')
-    # print(f'Their product is {functools.reduce(operator.mul, ans)}')
