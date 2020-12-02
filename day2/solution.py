@@ -22,12 +22,13 @@ def policy_2(data):
     for entry in data:
         tgt_letter = entry['key']
 
-        check_1 = entry['string'][entry['min']] == tgt_letter
-        check_2 = entry['string'][entry['max']] == tgt_letter
+        check_1 = entry['string'][int(entry['min'])-1] == tgt_letter
+        check_2 = entry['string'][int(entry['max'])-1] == tgt_letter
 
         if check_1 ^ check_2:
             valid_passwords += 1  
     return valid_passwords
+
 
 if __name__ == '__main__':
     data = read_file('day2/data.txt')
