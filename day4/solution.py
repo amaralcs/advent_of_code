@@ -32,7 +32,7 @@ def validate_field(entry, rules, debug=False):
 
         match = re.search(rules[key]['pat'], val)
         if match is None: # Failed match pattern
-            print(f'No match for {key}:{val}')
+            if debug: print(f'No match for {key}:{val}')
             return False
 
         if debug:
@@ -41,7 +41,7 @@ def validate_field(entry, rules, debug=False):
             print(f"Result of func {rules[key]['func'](*match.groups())}")
 
         if not rules[key]['func'](*match.groups()): # failed validation rule
-            print(f'Rule for {match.groups()} failed. Key {key}')
+            if debug: print(f'Rule for {match.groups()} failed. Key {key}')
             return False
         
     return valid
@@ -74,7 +74,7 @@ if __name__ == '__main':
                     59 <=int(x) and int(x)<=76  if unit=='in' else False
         },
         'hcl': {
-            'pat': r"\b(#[0-9a-f]{6})\b", # Something wrong with this rule
+            'pat': r"(#[0-9a-f]{6})", # Something wrong with this rule
             'func': lambda x: True
         },
         'ecl': {
@@ -92,5 +92,4 @@ if __name__ == '__main':
 
     valid_docs = [doc for doc, valid in zip(docs, results) if valid]
     field_valid_docs = [validate_field(doc, rules) for doc in valid_docs]
-    [validate_field(doc, rules, debug=True) for doc in valid_docs[:1]]
     sum(field_valid_docs)
