@@ -1,10 +1,5 @@
-from utils import read_file
+from utils import read_file, parse_multiline
 import re
-
-def parse_input(data, sep="?"):
-    separated = [val if val!= "" else sep for val in data]
-    concat = " ".join(separated)
-    return concat.split(sep)
 
 def find_fields(entry, pattern):
     fields = {}
@@ -50,7 +45,7 @@ def validate_field(entry, rules, debug=False):
 
 if __name__ == '__main':
     data = read_file('day4/data.txt')
-    parsed = parse_input(data)
+    parsed = parse_multiline(data)
     
     pat = r"(?P<key>[byriehgtclpd]{3}):(?P<val>[a-zA-Z0-9#]+)"
     rules = {
